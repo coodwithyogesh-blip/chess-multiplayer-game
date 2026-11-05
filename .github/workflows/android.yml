@@ -6,9 +6,10 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "puzzles.html"
+      - "online.html"
       - "style.css"
       - "js/**"
-      - "www/**"
       - "package.json"
       - "capacitor.config.json"
       - ".github/workflows/android.yml"
@@ -20,41 +21,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install JavaScript dependencies
+      - name: Install Android SDK packages
+        run: |
+          echo "y" | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - name: Install dependencies
         run: npm install
-
-      - name: Prepare web assets
+      - name: Prepare web app
         run: npm run build:web
-
       - name: Generate Android project
         run: npx cap add android
-
       - name: Sync Capacitor
         run: npx cap sync android
-
       - name: Build debug APK
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
