@@ -1,10 +1,10 @@
 {
   "name": "chess-puzzle-master",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Chess Puzzle Master Android app",
   "scripts": {
-    "build:web": "mkdir -p www/js && cp index.html style.css www/ && cp js/app.js www/js/app.js"
+    "build:web": "rm -rf www && mkdir -p www/js && cp index.html puzzles.html online.html style.css www/ && cp -R js/. www/js/"
   },
   "dependencies": {
     "@capacitor/android": "^6.2.0",
