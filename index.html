@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17120e">
+<title>Chess Puzzle Master</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>♞ Chess Puzzle Master</h1><p>Play • Learn • Master</p></header>
+<main>
+<section class="panel">
+<h2>Play against Computer</h2>
+<label for="difficulty">Choose Bot Difficulty</label>
+<select id="difficulty">
+<option value="easy">Easy</option><option value="medium" selected>Medium</option>
+<option value="hard">Hard</option><option value="grandmaster">Grandmaster</option>
+</select>
+<button id="start">Start Game</button>
+<div id="status" role="status">Choose a difficulty and start.</div>
+<div id="board" aria-label="Chess board"></div>
+</section>
+</main>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
