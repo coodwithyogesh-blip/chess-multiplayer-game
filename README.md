@@ -1,33 +1,37 @@
 # Chess Puzzle Master
 
-Mobile-first Chess Puzzle Master app for Android (Capacitor).
+A mobile-first chess game for Android, built with Capacitor.
 
-## Current features
-- Player vs Computer with Easy, Medium, Hard and Grandmaster settings (basic minimax bot; not a Stockfish-strength engine)
-- Legal chess moves through chess.js
-- Hint, undo and restart
-- 50 chess, maths and logic challenge levels with answer checking, explanations and on-device progress
-- Firebase Anonymous Authentication and room-code online chess lobby/game
-- Responsive wooden chessboard UI
+## Separate screens
+- Home: choose a game mode.
+- Play vs Computer: dedicated chessboard and bot difficulty screen.
+- 50 Puzzle Levels: separate puzzle progression screen.
+- Online menu: choose create room or join room.
+- Create Room: generates a private six-character invite code and waits for the opponent.
+- Join Room: separate screen to enter the invite code.
+- Online Game: dedicated multiplayer chessboard after both players connect.
 
-## Firebase setup (project: yogesh-chess)
-1. In Firebase Console, enable Authentication -> Sign-in method -> Anonymous.
-2. Create/enable Realtime Database.
-3. Open Realtime Database -> Rules and paste the contents of `database.rules.json`, then Publish.
-4. The Firebase web app config is in `js/firebase-config.js`. The API key in a Firebase web config is a public client identifier; protect data with database rules and Firebase App Check before public launch.
+## Game features
+- Player vs Computer with Easy, Medium, Hard and Grandmaster labels. The current bot is a small minimax search, not a Stockfish-strength engine.
+- Legal chess moves, castling, en passant, checkmate and draws through chess.js.
+- Move highlights, last-move indication, hint, undo and restart.
+- 50 chess, maths and logic questions with explanations, XP and local progress.
+- Firebase Anonymous Authentication and room-code multiplayer.
 
-## Build Android APK
-1. Open GitHub -> Actions -> Build Android APK.
-2. If it did not start automatically, choose Run workflow.
-3. Wait for a green check.
-4. Download artifact `chess-puzzle-master-debug-apk`, extract it and install `app-debug.apk`.
+## Firebase setup
+1. Enable Authentication -> Sign-in method -> Anonymous in Firebase Console.
+2. Enable Realtime Database.
+3. Publish the rules from database.rules.json.
+4. Firebase web config is in js/firebase-config.js.
 
-Package: `com.yogesh.chesspuzzlemaster`
+## Build APK
+Open GitHub Actions -> Build Android APK. Wait for a successful green check, then download the chess-puzzle-master-debug-apk artifact and extract app-debug.apk.
 
-## Current limitations / testing required
-- The online mode currently supports creating/joining a room by code. Random matchmaking is not included yet.
-- Firebase rules allow authenticated users to read room records so a joining player can locate a room by code; use App Check and consider stricter server-side validation before public release. Client-side move validation alone is not anti-cheat.
-- Puzzle progress is currently saved locally on the device; cloud sync is not implemented yet.
-- The 50 level bank currently contains chess knowledge, tactical concepts, arithmetic and logic questions; it is not yet a fully curated FEN-based tactics database.
-- Chess.js and Firebase SDKs are currently loaded from their hosted module URLs; internet is needed for these modules and for online play.
-- Test on real Android devices before public release. The generated APK is a debug build, not Play Store release-signed.
+Package: com.yogesh.chesspuzzlemaster.
+
+## Current limitations
+- Online play is room-code based; random matchmaking is not implemented.
+- Puzzle progress is local to the device; cloud progress sync is not implemented.
+- Puzzle questions are knowledge/math/logic prompts, not a full FEN-based tactics library.
+- Chess.js and Firebase modules are loaded from hosted URLs, so internet is required for these modules and online play.
+- The APK is a debug build, not a Play Store signed release. Real-device testing remains required.
