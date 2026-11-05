@@ -1,22 +1,17 @@
 name: Build Android APK
-
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - "index.html"
-      - "puzzles.html"
-      - "online.html"
+      - "*.html"
       - "style.css"
       - "js/**"
       - "package.json"
       - "capacitor.config.json"
       - ".github/workflows/android.yml"
-
 permissions:
   contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
