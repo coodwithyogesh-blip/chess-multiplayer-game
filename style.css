@@ -18,3 +18,16 @@ label{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);font-we
 #status{min-height:32px;color:var(--gold2);padding:10px 0}.settings{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.field{flex:1;min-width:150px}
 @media(max-width:760px){.grid-cards{grid-template-columns:1fr}.menu-card{min-height:unset}.game-layout{grid-template-columns:1fr}.game-side{order:2}.board-shell{max-width:560px}main{margin:18px auto}.hero{padding:25px 0 10px}}
 @media(max-width:390px){header{padding:0 13px}.brand span:last-child{font-size:11px}.square{font-size:clamp(24px,8vw,34px)}.coord{font-size:8px}}
+
+/* Fixed chessboard geometry: board remains square and each cell keeps equal size. */
+.board-shell{width:min(100%,560px);aspect-ratio:1/1;padding:8px;display:block;flex:none;overflow:hidden}
+#board,#onlineBoard{width:100%;height:auto;aspect-ratio:1/1;grid-template-rows:repeat(8,minmax(0,1fr));grid-template-columns:repeat(8,minmax(0,1fr));flex:none}
+.square{width:100%;height:100%;aspect-ratio:1/1;min-width:0;min-height:0;max-width:none;max-height:none;font-size:clamp(22px,6.4vw,56px)}
+.progress-track{height:8px;background:#46382a;border-radius:20px;overflow:hidden;margin:14px 0 20px}
+.progress-track>div{height:100%;width:0;background:linear-gradient(90deg,#b78a4c,#f0d6a3);transition:width .2s}
+.level-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:18px 0}
+.level-card{display:flex;flex-direction:column;gap:6px;min-height:88px;padding:12px;text-decoration:none;color:var(--text);background:#0d1712;border:1px solid var(--line);border-radius:12px}
+.level-card b{color:var(--gold2)}.level-card span,.level-card small{font-size:11px;color:var(--muted)}
+.challenge-icon{text-align:center;font-size:58px;margin:12px 0}
+#question{font-size:clamp(22px,5vw,30px);line-height:1.45;margin:22px 0}
+@media(max-width:520px){.level-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.board-shell{width:min(100%,calc(100vw - 36px));padding:6px}#board,#onlineBoard{width:100%;height:auto}.square{font-size:clamp(21px,7.4vw,34px)}}
