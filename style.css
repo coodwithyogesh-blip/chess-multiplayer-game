@@ -31,3 +31,13 @@ label{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);font-we
 .challenge-icon{text-align:center;font-size:58px;margin:12px 0}
 #question{font-size:clamp(22px,5vw,30px);line-height:1.45;margin:22px 0}
 @media(max-width:520px){.level-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.board-shell{width:min(100%,calc(100vw - 36px));padding:6px}#board,#onlineBoard{width:100%;height:auto}.square{font-size:clamp(21px,7.4vw,34px)}}
+
+/* Brain challenge controls */
+.brain-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--gold2);font-size:12px;margin:14px 0}
+.brain-meta span{background:#0d1712;border:1px solid var(--line);padding:8px 12px;border-radius:10px}
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.choice{min-height:54px;padding:10px;border:1px solid #526a59;border-radius:12px;background:#17251d;color:var(--text);font:700 16px 'DM Sans',sans-serif;cursor:pointer;overflow-wrap:anywhere}
+.choice.chosen{border-color:var(--gold);background:#35432d;color:var(--gold2);box-shadow:inset 0 0 0 1px var(--gold)}
+.choice:disabled{opacity:.55}
+.best-score{margin-top:14px;padding:12px;border-radius:12px;background:#0d1712;color:var(--gold2);font-size:13px}
+@media(max-width:390px){.choice-grid{gap:7px}.choice{font-size:14px;padding:8px}}
