@@ -1,8 +1,6 @@
 import {puzzles} from "./puzzles.js";
-const $=id=>document.getElementById(id);
-let completed=JSON.parse(localStorage.getItem("cpm_completed")||"[]"),level=Number(localStorage.getItem("cpm_level")||1);
-function render(){level=Math.max(1,Math.min(50,level));const p=puzzles[level-1];$("levelTitle").textContent="Level "+level+" / 50";$("progress").textContent=completed.length+" / 50 completed";$("progressFill").style.width=(completed.length/50*100)+"%";$("category").textContent=p.category+" • "+p.xp+" XP";$("question").textContent=p.question;$("answer").value="";$("feedback").textContent=completed.includes(level)?"✓ Completed! You can replay this level.":"";$("prev").disabled=level===1;$("next").disabled=level===50||!completed.includes(level);localStorage.setItem("cpm_level",level)}
-$("check").onclick=()=>{const p=puzzles[level-1],v=$("answer").value.trim().toLowerCase().replace(/\s+/g," ");if(v===p.answer.toLowerCase()){if(!completed.includes(level))completed.push(level);localStorage.setItem("cpm_completed",JSON.stringify(completed));$("feedback").textContent="Correct! +"+p.xp+" XP. "+p.explanation;render();$("feedback").textContent="Correct! +"+p.xp+" XP. "+p.explanation}else $("feedback").textContent="Not quite. Try again, or tap Show Explanation."};
-$("hint").onclick=()=>{$("feedback").textContent=puzzles[level-1].explanation+" Answer: "+puzzles[level-1].answer};
-$("prev").onclick=()=>{level--;render()};$("next").onclick=()=>{if(level===1||completed.includes(level)||completed.includes(level-1)){level++;render()}};
-render();
+const $=id=>document.getElementById(id),done=JSON.parse(localStorage.getItem("cpm_completed")||"[]");
+$("progress").textContent=done.length+" / 50 completed";
+$("xp").textContent=done.reduce((n,id)=>n+(puzzles[id-1]?.xp||0),0)+" XP";
+$("progressFill").style.width=(done.length/50*100)+"%";
+$("levels").innerHTML=puzzles.map(p=>'<a class="level-card" href="puzzle-play.html?level='+p.id+'"><b>Level '+p.id+'</b><span>'+p.category+'</span><small>'+(done.includes(p.id)?"✓ Completed":"+"+p.xp+" XP")+'</small></a>').join("");
